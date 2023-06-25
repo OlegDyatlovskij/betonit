@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/1', function () {
+    return view('index');
+});
+Route::get('/privacy-policy', function () {
+    return view('privacy-policy');
+});
+
+
+
+Route::fallback(function () {
+    return view('404');
+});
