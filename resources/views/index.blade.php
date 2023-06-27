@@ -765,13 +765,14 @@
                         data-aos-duration='800'>
                         <div class="item-price__top">
                             <div class="item-price__top-wrap">
-                                <h3 class="item-price__title">Базовый</h3>
-                                <div class="item-price__price">499 ₽</div>
-                                <h4 class="item-price__subtitle">в месяц за пользователя</h4>
+                                <h3 class="item-price__title">{{$productsRecords->toArray()[0]['title']}}</h3>
+                                <div class="item-price__price">{{$productsRecords->toArray()[0]['price']}}</div>
+                                <h4 class="item-price__subtitle">{{$productsRecords->toArray()[0]['period']}}</h4>
                             </div>
                         </div>
                         <div class="item-price__bottom">
                             <ul class="item-price__bottom-list">
+@foreach(json_decode($productsRecords->toArray()[0]['description']) as $des)
                                 <li class="item-price__bottom-item">
 							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
 	<div class="Icon__content">
@@ -781,41 +782,9 @@
 	</div>
 </span>
 
-                                    <h3 class="item-price__text">Планировщик производства</h3>
+                                    <h3 class="item-price__text">{{$des}}</h3>
                                 </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Канбан-доска</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Сменно-суточные задания</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Отчёты о работах</h3>
-                                </li>
+@endforeach
                             </ul>
 
                             <div class="item-price__bottom-btn">
@@ -830,13 +799,14 @@
                         data-aos-anchor-placement="center-bottom" data-aos-duration='500'>
                         <div class="item-price__top">
                             <div class="item-price__top-wrap">
-                                <h3 class="item-price__title">Расширенный</h3>
-                                <div class="item-price__price">999 ₽</div>
-                                <h4 class="item-price__subtitle">в месяц за пользователя</h4>
+                                <h3 class="item-price__title">{{$productsRecords->toArray()[1]['title']}}</h3>
+                                <div class="item-price__price">{{$productsRecords->toArray()[1]['price']}}</div>
+                                <h4 class="item-price__subtitle">{{$productsRecords->toArray()[1]['period']}}</h4>
                             </div>
                         </div>
                         <div class="item-price__bottom">
                             <ul class="item-price__bottom-list">
+@foreach(json_decode($productsRecords->toArray()[1]['description']) as $des)
                                 <li class="item-price__bottom-item">
 							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
 	<div class="Icon__content">
@@ -846,52 +816,9 @@
 	</div>
 </span>
 
-                                    <h3 class="item-price__text">Планировщик производства</h3>
+                                    <h3 class="item-price__text">{{$des}}</h3>
                                 </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Канбан-доска</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Сменно-суточные задания</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Отчёты о работах</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">+ API для интеграций</h3>
-                                </li>
+@endforeach
                             </ul>
 
                             <div class="item-price__bottom-btn">
@@ -906,13 +833,14 @@
                         data-aos-duration='800'>
                         <div class="item-price__top">
                             <div class="item-price__top-wrap">
-                                <h3 class="item-price__title">Профессиональный</h3>
-                                <div class="item-price__price">1 499 ₽</div>
-                                <h4 class="item-price__subtitle">в месяц за пользователя</h4>
+                                <h3 class="item-price__title">{{$productsRecords->toArray()[2]['title']}}</h3>
+                                <div class="item-price__price">{{$productsRecords->toArray()[2]['price']}}</div>
+                                <h4 class="item-price__subtitle">{{$productsRecords->toArray()[2]['period']}}</h4>
                             </div>
                         </div>
                         <div class="item-price__bottom">
                             <ul class="item-price__bottom-list">
+@foreach(json_decode($productsRecords->toArray()[2]['description']) as $des)
                                 <li class="item-price__bottom-item">
 							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
 	<div class="Icon__content">
@@ -922,63 +850,9 @@
 	</div>
 </span>
 
-                                    <h3 class="item-price__text">Планировщик производства</h3>
+                                    <h3 class="item-price__text">{{$des}}</h3>
                                 </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Канбан-доска</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Сменно-суточные задания</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Отчёты о работах</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">+ API для интеграций</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">+ Сложные техпроцессы</h3>
-                                </li>
+@endforeach
                             </ul>
 
                             <div class="item-price__bottom-btn">
@@ -1199,7 +1073,7 @@
                             </a>
                         </li>
                     </ul>
-                    <h3 class="Social-networks__title">ООО «Команда Ф5» <br> ИНН <a>2130183567</a></h3>
+                    <h3 class="Social-networks__title">{{$informationRecords->toArray()[0]['company']}}<br> ИНН <a>2130183567</a></h3>
                 </div>
             </div>
 
@@ -1217,7 +1091,7 @@
 
                         <div class="Feedback__number">
                             <a class="Feedback__number-link Link Link--l Link--color-e " target="_blank"
-                               href="tel:+78002009397">8 (800) 200-93-97</a>
+                               href="tel:+78002009397">{{$informationRecords->toArray()[0]['phone']}}</a>
 
                         </div>
                     </div>
@@ -1230,7 +1104,7 @@
 	</div>
 </span>
 
-                        <h3 class="Feedback__address-title">Россия, г. Чебоксары, ул. Карла Маркса, 52/9</h3>
+                        <h3 class="Feedback__address-title">{{$informationRecords->toArray()[0]['address']}}</h3>
                     </div>
                     <div class="Feedback__block-mail">
 			<span class="Feedback__block-mail-icon Icon Icon--s Icon--color-e ">
@@ -1243,7 +1117,7 @@
 
                         <div class="Feedback__mail">
                             <a class="Feedback__mail-link Link Link--s Link--color-e " target="_blank"
-                               href="mailto:hello@proplan.su">hello@proplan.su</a>
+                               href="mailto:hello@proplan.su">{{$informationRecords->toArray()[0]['email']}}</a>
 
                         </div>
                     </div>
@@ -1263,20 +1137,24 @@
             </div>
 
             <div class="popup-write-us__block-input-form">
-                <form class="popup-write-us__form js-form-validation" action="/url1.php" novalidate="novalidate"
-                      onsubmit="formApi(this); return false">
+                @php
+                    $main = true;
+                    $tableName = 'users';
+                @endphp
+                <form class="popup-write-us__form js-form-validation" action="{{ route('user.create', ['table' => $tableName, 'main' => $main]) }}" novalidate="novalidate" onsubmit="formApi(this); return false">
+                    @csrf
                     <div class="popup-write-us__block-inputs">
                         <div class="Input input">
-                            <input class="Input__inp" type="text" name="fio" placeholder="ФИО" required=""/>
+                            <input class="Input__inp" type="text" name="name" placeholder="ФИО" required=""/>
                             <span class="input-validation__message input-validation__message-mod"></span>
                         </div>
                         <div class="Input input">
-                            <input class="Input__inp mask-phone-js" type="tel" name="tel" placeholder="Телефон"
+                            <input class="Input__inp mask-phone-js" type="tel" name="phone" placeholder="Телефон"
                                    required=""/>
                             <span class="input-validation__message input-validation__message-mod"></span>
                         </div>
                         <div class="Input input">
-                            <input class="Input__inp" type="email" name="mail" placeholder="E-mail"/>
+                            <input class="Input__inp" type="email" name="email" placeholder="E-mail"/>
                         </div>
                     </div>
                     <div class="Action-button">
@@ -1284,7 +1162,7 @@
                             <input type="checkbox" name="checkbox" required=""/>
                             <span class="Action-button__content">
 							<span class="Action-button__text Action-button__text--policy"> Вы принимаете условия <a
-                                    href="##"
+                                    href="privacy-policy"
                                     target="_blank">пользовательского соглашения и политики конфиденциальности</a> </span>
 						</span>
                             <span class="input-validation__message input-validation__message-mod"></span>
