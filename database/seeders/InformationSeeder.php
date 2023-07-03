@@ -13,7 +13,16 @@ class InformationSeeder extends Seeder
      */
     public function run(): void
     {
-        $data = ['INN' => '2130183567', 'company' => 'ООО «Команда Ф5»', 'phone' => '88002009397', 'address' => "Россия, г. Чебоксары, ул. Карла Маркса, 52/9", 'email' => 'hello@proplan.su', 'skype' => '#', 'whatsapp' => '#', 'telegram' => '#'];
+        $data = [
+            'INN' => '2130183567', 
+            'company' => 'ООО «Команда Ф5»', 
+            'phone' => '88002009397', 
+            'address' => "Россия, г. Чебоксары, ул. Карла Маркса, 52/9", 
+            'email' => 'hello@proplan.su', 
+            'skype' => '#', 
+            'whatsapp' => 
+            '#', 'telegram' => '#'
+        ];
         DB::table('information')->insert($data);
     }
 

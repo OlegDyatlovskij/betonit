@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('orders', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->unsignedBigInteger('product_id');
-            $table->unsignedBigInteger('user_id');
+            $table->increments('id');
+            $table->unsignedInteger('product_id');
+            $table->unsignedInteger('user_id');
             $table->enum('state', ['Принят', 'В обработке', 'В ожидании', 'Отклонён'])->default('В ожидании');
             $table->foreign('product_id')->references('id')->on('products')->onUpdate('CASCADE');
             $table->foreign('user_id')->references('id')->on('users')->onUpdate('CASCADE');
@@ -29,6 +29,10 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('orders', function (Blueprint $table) {
+            $table->dropForeign('orders_product_id_foreign');
+            $table->dropForeign('orders_user_id_foreign'); 
+        });
         Schema::dropIfExists('orders');
     }
 };

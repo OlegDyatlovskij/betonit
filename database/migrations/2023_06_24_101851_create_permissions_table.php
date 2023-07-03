@@ -14,8 +14,8 @@ return new class extends Migration
     {
         Schema::create('permissions', function (Blueprint $table) {
             $table->engine = 'InnoDB';
-            $table->id();
-            $table->unsignedBigInteger('role_id');
+            $table->increments('id');
+            $table->unsignedInteger('role_id');
             $table->string('name');
             $table->string('login');
             $table->string('password');
@@ -29,6 +29,9 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('permissions', function (Blueprint $table) {
+            $table->dropForeign('permissions_role_id_foreign');
+        });
         Schema::dropIfExists('permissions');
     }
 };
