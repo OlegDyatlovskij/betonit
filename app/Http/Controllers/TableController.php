@@ -9,29 +9,76 @@ use App\Models\Orders;
 use App\Models\Products;
 use App\Models\Information;
 use App\Models\Permissions;
+use App\Models\Facilities;
 use Illuminate\Support\Facades\Schema;
 
 class TableController extends Controller
 {
-    public function showUpdateForm($tableName, $id, $updateRecord)
+    public function showUpdateForm($tableName, $id, $updateRecord, $errorMessage = '')
     {
         $tableModel = app("App\\Models\\$tableName");
-        $table = $tableModel::getAllRecords();
-        if ($tableName === 'information')
-            $record = $tableModel::where('INN', $id)->first();
-        else
-            $record = $tableModel::find($id);
-        $home = false;
+        $record = $tableModel::getRecord($id);
         $action = 'update';
-        return view('layouts.admin', ['action' => $action, 'home' => $home, 'table' => $table, 'tableName' => $tableName, 'updateRecord' => $updateRecord, 'id' => $id, 'record' => $record]);
+        $output = [
+            'action' => $action, 
+            'tableName' => $tableName, 
+            'updateRecord' => $updateRecord, 
+            'record' => $record,
+            'errorMessage' => $errorMessage
+        ];
+        if ($tableName === 'orders')
+        {
+            $usersId = Users::getAllId();
+            $productsId = Products::getAllId();
+            $output['usersId'] = $usersId;
+            $output['productsId'] = $productsId;
+        }
+        else if ($tableName === 'permissions')
+        {
+            $rolesId = Roles::getAllId();
+            $output['rolesId'] = $rolesId;
+        }
+        return view('layouts.admin', $output);
     }
-    public function showForm($tableName, $action, $updateRecord = false)
+    public function showForm($tableName, $action, $errorMessage = '')
     {
+        $updateRecord = false;
         $tableModel = app("App\\Models\\$tableName");
-        $table = $tableModel::getAllRecords();
-        $headers = Schema::getColumnListing($tableName);
-        $home = false;
-        
-        return view('layouts.admin', ['action' => $action, 'home' => $home, 'table' => $table, 'tableName' => $tableName, 'updateRecord' => $updateRecord, 'headers' => $headers]);
+        $headers = $tableModel::getHeaders();
+        $output = [
+            'tableName' => $tableName, 
+            'action' => $action,
+            'updateRecord' => $updateRecord,
+            'headers' => $headers,
+            'errorMessage' => $errorMessage
+        ];
+        if ($action != 'create')
+        {
+            $table = $tableModel::getAllRecords();
+            $output['table'] = $table;
+        }
+        else
+        {
+            if ($tableName === 'orders')
+            {
+                $usersId = Users::getAllId();
+                $productsId = Products::getAllId();
+                $output['usersId'] = $usersId;
+                $output['productsId'] = $productsId;
+            }
+            else if ($tableName === 'permissions')
+            {
+                $rolesId = Roles::getAllId();
+                $output['rolesId'] = $rolesId;
+            }
+        }
+        return view('layouts.admin', $output);
+            /*[
+                'action' => $action, 
+                'table' => $table, 
+                'tableName' => $tableName, 
+                'updateRecord' => $updateRecord, 
+                'headers' => $headers
+            ]*/
     }
 }

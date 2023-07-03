@@ -26,17 +26,13 @@
                         <tbody>  
                         @foreach($table as $record)
                             <tr>
-                                @foreach($record->toArray() as $key => $value)
+                                @foreach($record as $key => $value)
                                 <td>{{ $value }}</td>
                                 @endforeach
                                 <td>
-                                    @if ($tableName === 'information')
-                                    <form action="{{ route('form.update', ['table' => $tableName, 'id' => $record->INN, 'updateRecord' => $updateRecord]) }}" method="POST">
-                                    @else
-                                    <form action="{{ route('form.update', ['table' => $tableName, 'id' => $record->id, 'updateRecord' => $updateRecord]) }}" method="POST">
-                                    @endif
+                                    <form action="{{ route('form.update', ['table' => $tableName, 'id' => $record['id'], 'updateRecord' => $updateRecord]) }}" method="POST">
                                     @method('GET')
-                                    @csrf
+                                    @csrf                                    
                                     <button type="submit">Update</button>
                                     </form>
                                 </td>
@@ -63,23 +59,69 @@
 <div class="card-header">
     <h3 class="card-title">{{$tableName}}</h3>
 </div>
-<form method="POST" action="{{ route('record.update', ['id' => $tableName === 'information' ? $record->INN : $record->id, 'table' => $tableName]) }}">
+<form method="POST" action="{{ route('record.update', ['id' => $record['id'], 'table' => $tableName]) }}">
     @csrf
     @method('PUT')
     <div class="card-body">
-    @foreach($record->toArray() as $key => $value)
-    
-        @if ($key === "id" or $key === 'created_at' or $key === 'updated_at')
-            @continue;
-        @endif
-        <div class="form-group">
-            <label>{{ $key }}</label>
-            <input class="form-control" name = "{{ $key }}" placeholder="{{ $value }}" value="{{ $value }}">
-        </div>
-    @endforeach
+    @if ($tableName === 'orders')
+        <label>user_id</label>
+        <select class="form-control" name="user_id">
+            @foreach ($usersId as $id=>$name)
+                @php
+                @endphp
+                @if ($record['user_id'] === $id)
+                    <option value="{{ $id }}" selected>{{ $name }}</option>
+                    @continue
+                @endif
+                    <option value="{{ $id }}">{{ $name }}</option>
+            @endforeach
+        </select> 
+        <label>product_id</label>
+        <select class="form-control" name="product_id">
+            @foreach ($productsId as $id=>$title)
+                @if ($record['product_id'] === $id)
+                    <option selected value="{{ $id }}">{{ $title }}</option>
+                    @continue
+                @endif
+                <option value="{{ $id }}">{{ $title }}</option>
+            @endforeach
+        </select>
+        <label>state</label>
+        <select class="form-control" name="state">
+                <option value="В ожидании" {{ $record['state'] === 'В ожидании' ? 'selected' : '' }}>В ожидании</option>
+                <option value="В обработке" {{ $record['state'] === 'В обработке' ? 'selected' : '' }}>В обработке</option>
+                <option value="Принят" {{ $record['state'] === 'Принят' ? 'selected' : '' }}>Принят</option>
+                <option value="Отклонён" {{ $record['state'] === 'Отклонён' ? 'selected' : '' }}>Отклонён</option>
+        </select>
+    @else
+        @foreach($record as $key => $value)
+            @if ($key === "id" or $key === 'created_at' or $key === 'updated_at')
+                @continue;
+            @endif
+            @if ($tableName === 'permissions')
+                @if ($key === 'role_id')
+                    <label>{{ $key }}</label>
+                    <select class="form-control" name="{{ $key }}">
+                        @foreach ($rolesId as $id=>$role)
+                            @if ($record['role_id'] === $id)
+                                <option selected value="{{ $id }}">{{ $role }}</option>
+                                @continue
+                            @endif
+                                <option value="{{ $id }}">{{ $role }}</option>
+                        @endforeach
+                    </select>
+                    @continue
+                @endif
+            @endif
+            <div class="form-group">
+                <label>{{ $key }}</label>
+                <input class="form-control" name = "{{ $key }}" placeholder="{{ $value }}" value="{{ $value }}">
+            </div>
+        @endforeach
+    @endif
     </div>
     <div class="card-footer">
-        <button type="submit" class="btn btn-primary">Update</button>
+        <p><button type="submit" class="btn btn-primary">Update</button>   {{ $errorMessage }}</p>
     </div>
 </form>
 @endif

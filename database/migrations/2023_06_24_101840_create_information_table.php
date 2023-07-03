@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('information', function (Blueprint $table) {
             $table->engine = 'InnoDB';
+            $table->increments('id');
             $table->integer('INN');
-            $table->primary('INN');
             $table->string('company');
             $table->string('phone');
             $table->string('address');

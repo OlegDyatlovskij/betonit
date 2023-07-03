@@ -2,25 +2,57 @@
 
 namespace App\Models;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Eloquent\Model;
 class Orders extends Model
 {
-    protected $table = 'orders';
+    protected $fillable = ['product_id', 'user_id', 'state'];
 
-    protected $fillable = ['product_id', 'User_id', 'state'];
+    protected static $headers = ['id', 'product_id', 'user_id', 'state', 'created_at', 'updated_at'];
+    
+    protected $attributes = [
+        'state' => 'В ожидании',
+    ];
 
-    public static function createRecord($data)
+    public static function createRecord(Request $request)
     {
+        $data = $request->except('_token');
         return self::create($data);
     }
     public static function getAllRecords()
     {
-        return self::all(); // возвращается в виде модели. Чтобы представить в виде ассоциативного массива метод: ->toArray()
+        $records = Orders::all();
+        $records = $records->toArray();
+        foreach ($records as &$record)
+        {
+            foreach ($record as $key => $value)
+            {
+                if ($key === 'product_id')
+                {
+                    $record[$key] = DB::table('products')->where('id', $value)->value('title');
+                }
+                else if ($key === 'user_id')
+                {
+                    $record[$key] = DB::table('users')->where('id', $value)->value('name');
+                }
+            }
+        }
+        return $records; 
     }
 
+    public static function getRecord($id)
+    {
+        $record = Orders::find($id);
+        return $record->toArray();
+    }
+    public static function getHeaders()
+    {
+        return self::$headers;
+    }
     public static function deleteRecord($id)
     {
-        $record = Orders::find();
+        $record = Orders::find($id);
         if ($record)
         {
             $record->delete();
@@ -28,9 +60,10 @@ class Orders extends Model
         }
         return false;
     }
-    public static function updateData($id, $newData)
+    public static function updateData($id, Request $request)
     {
-        if(Orders::where('id', $id)->update($newData)) // update возвращает кол-во обновленных строк, или 0 (false) если не найдено записей по условию
+        $newData = $request->except('_token', '_method');
+        if(Orders::where('id', $id)->update($newData)) 
         {
             return true;
         }

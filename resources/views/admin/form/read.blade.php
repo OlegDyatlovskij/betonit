@@ -22,7 +22,7 @@
                         <tbody>
                         @foreach($table as $record)
                             <tr>
-                            @foreach($record->toArray() as $key => $value)
+                            @foreach($record as $key => $value)
                                 <td>{{$value}}</td>
                             @endforeach
                             </tr>

@@ -234,6 +234,42 @@
                 </ul>
               </li>
               <!---->
+              <!--FACILITIES-->
+              <li class="nav-item">
+                <a href="#" class="nav-link">
+                  <i class="nav-icon fas fa-file"></i>
+                  <p>
+                    Facilities
+                  <i class="fas fa-angle-left right"></i>
+                  </p>
+                </a>
+                <ul class="nav nav-treeview" style="display: none;">
+                  <li class="nav-item">
+                    <a href="{{ route('table.action', ['table' => 'facilities', 'action' => 'create']) }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Create new record</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('table.action', ['table' => 'facilities', 'action' => 'read']) }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Read all records</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('table.action', ['table' => 'facilities', 'action' => 'update']) }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Update record</p>
+                    </a>
+                  </li>
+                  <li class="nav-item">
+                    <a href="{{ route('table.action', ['table' => 'facilities', 'action' => 'delete']) }}" class="nav-link">
+                      <i class="far fa-circle nav-icon"></i>
+                      <p>Delete record</p>
+                    </a>
+                  </li>
+                </ul>
+              </li>
             </ul>
           </li>
         </ul>

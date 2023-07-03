@@ -22,15 +22,11 @@
                         <tbody>
                         @foreach($table as $record)
                             <tr>
-                                @foreach($record->toArray() as $key => $value)
+                                @foreach($record as $key => $value)
                                 <td>{{ $value }}</td>
                                 @endforeach
                                 <td>
-                                    @if ($tableName === 'information')
-                                    <form action="{{route('record.delete', ['id' => $record->INN, 'table' => $tableName]) }}" method="POST">
-                                    @else
-                                    <form action="{{ route('record.delete', ['id' => $record->id, 'table' => $tableName]) }}" method="POST">
-                                    @endif
+                                    <form action="{{ route('record.delete', ['id' => $record['id'], 'table' => $tableName]) }}" method="POST">
                                     @method('DELETE')
                                     @csrf
                                         <button type="submit">Delete</button>

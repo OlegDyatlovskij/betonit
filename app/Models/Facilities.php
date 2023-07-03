@@ -2,36 +2,38 @@
 
 namespace App\Models;
 
-use App\Exceptions\MyException;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
-class Roles extends Model
-{
-    protected $fillable = ['role'];
+use App\Exceptions\MyException;
 
-    protected static $headers = ['id', 'role', 'created_at', 'updated_at'];
+class Facilities extends Model
+{
+    protected $fillable = ['title', 'description', 'srcset', 'alt', 'src'];
+
+    protected static $headers = ['id', 'title', 'description', 'srcset', 'alt', 'src','created_at', 'updated_at'];
 
     public static function createRecord(Request $request)
     {
         $data = $request->except('_token');
-        if (!$data['role'])
+        if (!$data['title'] or !$data['description'] or !$data['srcset'] or !$data['alt'] or !$data['src'])
             throw new MyException('заполните поля');
+        //dd($data);
         return self::create($data);
     }
     public static function getAllRecords()
     {
-        $records = Roles::all();
+        $records = Facilities::all();
         $records = $records->toArray();
         return $records; 
     }
     public static function getRecord($id)
     {
-        $record = Roles::find($id);
+        $record = Facilities::find($id);
         return $record->toArray();
     }
     public static function getAllId()
     {
-        $record = Roles::pluck('role', 'id');
+        $record = Facilities::pluck('title', 'id');
         return $record->toArray();
     }
     public static function getHeaders()
@@ -40,7 +42,7 @@ class Roles extends Model
     }
     public static function deleteRecord($id)
     {
-        $record = Roles::find($id);
+        $record = Facilities::find($id);
         if ($record)
         {
             $record->delete();
@@ -51,11 +53,12 @@ class Roles extends Model
     public static function updateData($id, Request $request)
     {
         $newData = $request->except('_token', '_method');
-        if(Roles::where('id', $id)->update($newData)) 
+        if (!$newData['title'] or !$newData['description'] or !$newData['srcset'] or !$newData['alt'] or !$newData['src'])
+            throw new MyException('заполните поля');
+        if(Facilities::where('id', $id)->update($newData)) 
         {
             return true;
         }
         return false;
     }
 }
-?>
