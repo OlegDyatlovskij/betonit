@@ -1,132 +1,7 @@
 <!DOCTYPE html>
 
-<html lang="ru">
-<head>
-    <meta charset="UTF-8"/>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <link rel="stylesheet" href="css/libs-styles.min.css"/>
-    <link rel="stylesheet" href="css/main.min.css"/>
-    <title>О компании</title>
-
-</head>
-
+@include('includes.header')
 <body>
-<div class="container">
-    <header class="header header--main">
-        <div class="header__wrapper header__wrapper--max-width header__wrapper--container">
-            <div class="header__action">
-                <a class="header__logo" href="#hero">
-                    <div class="header__logo-picture Picture">
-                        <picture class="Picture__block-img">
-                            <source class="Picture__img" srcset="img/logo.webp" alt="logo.png" type="image/webp"/>
-                            <img class="Picture__img" src="img/logo.png" alt="logo.png"/>
-                        </picture>
-                    </div>
-                </a>
-                <div class="header__hamb Hamb">
-                    <div class="Hamb__field" id="hamb">
-                        <span class="Hamb__bar"></span>
-                        <span class="Hamb__bar"></span>
-                        <span class="Hamb__bar"></span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="header__navigation">
-                <nav class="header__nav Nav">
-                    <div class="Nav__wrapper">
-                        <ul class="Nav__list" id="menu">
-                            <li class="Nav__item item-nav"><a
-                                    class="item-nav__link item-nav__link--active Link Link--header Link--s Link--color-header "
-                                    href="#hero">Продукт</a>
-                            </li>
-                            <li class="Nav__item item-nav"><a
-                                    class="item-nav__link Link Link--header Link--s Link--color-header "
-                                    href="#ability">Возможности</a>
-                            </li>
-                            <li class="Nav__item item-nav"><a
-                                    class="item-nav__link Link Link--header Link--s Link--color-header "
-                                    href="#management">Внедрение</a>
-                            </li>
-
-                            <li class="Nav__item item-nav"><a
-                                    class="item-nav__link Link Link--header Link--s Link--color-header " href="#price">Цена</a>
-                            </li>
-                            <li class="Nav__item item-nav"><a
-                                    class="item-nav__link Link Link--header Link--s Link--color-header " href="#info">О
-                                компании</a>
-                            </li>
-                        </ul>
-                    </div>
-                </nav>
-
-                <div class="Nav__mobile">
-                    <div class="Nav__mobile-wrapper">
-                        <div class="Nav__mobile-feedback Feedback Feedback--phone-header">
-                            <div class="Feedback__wrapper">
-                                <a class="Feedback__phone-link Link Link--xxl Link--color-a-decor " target="_blank"
-                                   href="tel:+78002009397">8(800)200-93-97</a>
-
-                            </div>
-                        </div>
-
-                        <div class="Nav__mobile-social-networks Social-networks Social-networks--header">
-                            <div class="Social-networks__wrapper">
-                                <ul class="Social-networks__list">
-                                    <li class="Social-networks__item">
-                                        <a class="Social-networks__link" href="#" target="_blank">
-					<span class="Social-networks__link-icon Icon Icon--m Icon--color-b ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#skype"></use>
-		</svg>
-	</div>
-</span>
-
-                                        </a>
-                                    </li>
-                                    <li class="Social-networks__item">
-                                        <a class="Social-networks__link" href="#" target="_blank">
-					<span class="Social-networks__link-icon Icon Icon--m Icon--color-b ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#whatsapp"></use>
-		</svg>
-	</div>
-</span>
-
-                                        </a>
-                                    </li>
-                                    <li class="Social-networks__item">
-                                        <a class="Social-networks__link" href="#" target="_blank">
-					<span class="Social-networks__link-icon Icon Icon--m Icon--color-b ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#telegram"></use>
-		</svg>
-	</div>
-</span>
-
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <div class="header__btn">
-                <a class="Button Button--s Button--color-a" href="#popup-write-us" data-fancybox-window>
-                    <span class="Button__text">Заказать онлайн-презентацию</span>
-                </a>
-
-            </div>
-        </div>
-    </header>
-
-
     <main class="index ident-menu-js" id="scroll-top">
         <section class="hero " id="hero"
                  style="background-image: url(/img/hero-bg.jpg); background-position: center;background-size: cover;"
@@ -161,13 +36,25 @@
                 <div class="Tabs">
                     <div class="Tabs__wrapper">
                         <div class="Tabs__btns">
-                            <div class="Tabs__item Tabs__item--active" data-identification-tab="3" data-index-tab="1">
+<!--следующая переменная нужна для указания активной кнопки-->
+@php
+    $first = true;
+@endphp
+@for ($i = 0; $i < count($facilitiesRecords); $i++)
+@if ($first)
+                            <div class="Tabs__item Tabs__item--active" data-identification-tab="3" data-index-tab="{{$i}}">
+@php
+    $first = false;
+@endphp
+@else
+                            <div class="Tabs__item" data-identification-tab="3" data-index-tab="{{$i}}">
+@endif
                                 <button class="Button Button--line Button--theme-m Button--theme-m-w">
-                                    <span class="Button__text">Головная программа</span>
+                                    <span class="Button__text">{{ $facilitiesRecords[$i]['title'] }}</span>
                                 </button>
                             </div>
-
-                            <div class="Tabs__item" data-identification-tab="3" data-index-tab="2">
+@endfor
+                            <!--<div class="Tabs__item" data-identification-tab="3" data-index-tab="2">
                                 <button class="Button Button--line Button--theme-m Button--theme-m-w">
                                     <span class="Button__text">Программма оператора</span>
                                 </button>
@@ -189,10 +76,56 @@
                                 <button class="Button Button--line Button--theme-m Button--theme-m-w">
                                     <span class="Button__text">Интеграции</span>
                                 </button>
-                            </div>
+                            </div>-->
                         </div>
 
                         <div class="Tabs__blocks">
+<!--следующая переменная нужна для указания активной кнопки-->
+@php
+    $first = true;
+@endphp
+@for ($i = 0; $i < count($facilitiesRecords); $i++)
+@if ($first)
+                            <div class="Tabs__block Tabs__block--active" data-identification-tab="3" data-index-tab="{{$i}}">
+@else
+                            <div class="Tabs__block Tabs__block--not-active" data-identification-tab="3" data-index-tab="{{$i}}">
+@endif
+                                <div class="block-tabs">
+                                    <div class="block-tabs__wrapper">
+@if ($first)
+                                        <div class="block-tabs__img" data-aos="fade-right">
+@else
+                                        <div class="block-tabs__img">
+@endif
+                                            <div class="block-tabs__logo-picture Picture">
+                                                <picture class="Picture__block-img">
+                                                    <source class="Picture__img" type="image/webp"
+                                                            srcset="{{ $facilitiesRecords[$i]['srcset'] }}" alt="{{ $facilitiesRecords[$i]['alt'] }}"
+                                                            data-fancybox href="{{ $facilitiesRecords[$i]['srcset'] }}"/>
+                                                    <img class="Picture__img" src="{{ $facilitiesRecords[$i]['src'] }}"
+                                                         alt="{{ $facilitiesRecords[$i]['alt'] }}" data-fancybox
+                                                         href="{{ $facilitiesRecords[$i]['src'] }}"/>
+                                                </picture>
+                                            </div>
+                                        </div>
+@if ($first)
+                                        <div class="block-tabs__content" data-aos="fade-left">
+@php
+    $first = false;
+@endphp
+@else
+                                        <div class="block-tabs__content">
+@endif
+                                            <h2 class="block-tabs__content-title">{{ $facilitiesRecords[$i]['title'] }}</h2>
+                                            @php
+                                                echo $facilitiesRecords[$i]['description'];
+                                            @endphp
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+@endfor
+<!--
                             <div class="Tabs__block Tabs__block--active" data-identification-tab="3" data-index-tab="1">
                                 <div class="block-tabs">
                                     <div class="block-tabs__wrapper">
@@ -348,7 +281,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>-->
                         </div>
                     </div>
                 </div>
@@ -759,19 +692,24 @@
             <div class="price__wrapper price__wrapper--max-width price__wrapper--container">
                 <h2 class="price__heading-title Title Title--xxxl Title--color-b" data-aos="fade-down"> Сколько стоит
                     АСУ «БетонИТ»</h2>
-
+@php
+    $count = count($productsRecords);
+    $counter = 0;
+@endphp
+@for ($i = 0; $i < count($productsRecords); $i += 3)
                 <ul class="price__list">
                     <li class="price__item item-price" data-aos='fade-left' data-aos-anchor-placement="center-bottom"
                         data-aos-duration='800'>
                         <div class="item-price__top">
                             <div class="item-price__top-wrap">
-                                <h3 class="item-price__title">Базовый</h3>
-                                <div class="item-price__price">499 ₽</div>
-                                <h4 class="item-price__subtitle">в месяц за пользователя</h4>
+                                <h3 class="item-price__title">{{$productsRecords[$counter]['title']}}</h3>
+                                <div class="item-price__price">{{$productsRecords[$counter]['price']}} ₽</div>
+                                <h4 class="item-price__subtitle">{{$productsRecords[$counter]['period']}}</h4>
                             </div>
                         </div>
                         <div class="item-price__bottom">
                             <ul class="item-price__bottom-list">
+@foreach($productsRecords[$counter]['description'] as $des)
                                 <li class="item-price__bottom-item">
 							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
 	<div class="Icon__content">
@@ -781,41 +719,10 @@
 	</div>
 </span>
 
-                                    <h3 class="item-price__text">Планировщик производства</h3>
+                                    <h3 class="item-price__text">{{$des}}</h3>
                                 </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
+@endforeach
 
-                                    <h3 class="item-price__text">Канбан-доска</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Сменно-суточные задания</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Отчёты о работах</h3>
-                                </li>
                             </ul>
 
                             <div class="item-price__bottom-btn">
@@ -826,17 +733,26 @@
                             </div>
                         </div>
                     </li>
-                    <li class="price__item item-price" data-aos="fade-up"
-                        data-aos-anchor-placement="center-bottom" data-aos-duration='500'>
+@php
+    $counter += 1;
+    if ($counter == $count)
+    {
+        echo '</ul>';
+        break;
+    }
+@endphp
+                    <li class="price__item item-price" data-aos="fade-up" data-aos-anchor-placement="center-bottom" 
+                    data-aos-duration='500'>
                         <div class="item-price__top">
                             <div class="item-price__top-wrap">
-                                <h3 class="item-price__title">Расширенный</h3>
-                                <div class="item-price__price">999 ₽</div>
-                                <h4 class="item-price__subtitle">в месяц за пользователя</h4>
+                                <h3 class="item-price__title">{{$productsRecords[$counter]['title']}}</h3>
+                                <div class="item-price__price">{{$productsRecords[$counter]['price']}} ₽</div>
+                                <h4 class="item-price__subtitle">{{$productsRecords[$counter]['period']}}</h4>
                             </div>
                         </div>
                         <div class="item-price__bottom">
                             <ul class="item-price__bottom-list">
+@foreach($productsRecords[$counter]['description'] as $des)
                                 <li class="item-price__bottom-item">
 							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
 	<div class="Icon__content">
@@ -846,52 +762,9 @@
 	</div>
 </span>
 
-                                    <h3 class="item-price__text">Планировщик производства</h3>
+                                    <h3 class="item-price__text">{{$des}}</h3>
                                 </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Канбан-доска</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Сменно-суточные задания</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Отчёты о работах</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">+ API для интеграций</h3>
-                                </li>
+@endforeach
                             </ul>
 
                             <div class="item-price__bottom-btn">
@@ -902,17 +775,26 @@
                             </div>
                         </div>
                     </li>
+@php
+    $counter += 1;
+    if ($counter == $count)
+    {
+        echo '</ul>';
+        break;
+    }
+@endphp
                     <li class="price__item item-price" data-aos='fade-right' data-aos-anchor-placement="center-bottom"
                         data-aos-duration='800'>
                         <div class="item-price__top">
                             <div class="item-price__top-wrap">
-                                <h3 class="item-price__title">Профессиональный</h3>
-                                <div class="item-price__price">1 499 ₽</div>
-                                <h4 class="item-price__subtitle">в месяц за пользователя</h4>
+                                <h3 class="item-price__title">{{$productsRecords[$counter]['title']}}</h3>
+                                <div class="item-price__price">{{$productsRecords[$counter]['price']}} ₽</div>
+                                <h4 class="item-price__subtitle">{{$productsRecords[$counter]['period']}}</h4>
                             </div>
                         </div>
                         <div class="item-price__bottom">
                             <ul class="item-price__bottom-list">
+@foreach($productsRecords[$counter]['description'] as $des)
                                 <li class="item-price__bottom-item">
 							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
 	<div class="Icon__content">
@@ -922,63 +804,9 @@
 	</div>
 </span>
 
-                                    <h3 class="item-price__text">Планировщик производства</h3>
+                                    <h3 class="item-price__text">{{$des}}</h3>
                                 </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Канбан-доска</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Сменно-суточные задания</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">Отчёты о работах</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">+ API для интеграций</h3>
-                                </li>
-                                <li class="item-price__bottom-item">
-							<span class="item-price__bottom-item-icon Icon Icon--m Icon--color-a ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#select"></use>
-		</svg>
-	</div>
-</span>
-
-                                    <h3 class="item-price__text">+ Сложные техпроцессы</h3>
-                                </li>
+@endforeach
                             </ul>
 
                             <div class="item-price__bottom-btn">
@@ -989,7 +817,16 @@
                             </div>
                         </div>
                     </li>
+@php
+    $counter += 1;
+    if ($counter == $count)
+    {
+        echo '</ul>';
+        break;
+    }
+@endphp
                 </ul>
+@endfor
             </div>
         </section>
 
@@ -1147,111 +984,7 @@
         </a>
 
     </main>
-    <footer class="footer" id="footer"
-            style="background-image: url(/img/footer-bg.jpg); background-position: center;background-size: cover;">
-        <div class="footer__wrapper footer__wrapper--max-width footer__wrapper--container">
-            <a class="footer__logo" href="#">
-                <div class="footer__logo-picture Picture">
-                    <picture class="Picture__block-img">
-                        <source class="Picture__img" srcset="img/logo-2.webp" alt="logo-2.png" type="image/webp"/>
-                        <img class="Picture__img" src="img/logo-2.png" alt="logo-2.png"/>
-                    </picture>
-                </div>
-
-            </a>
-            <div class="footer__social-networks Social-networks">
-                <div class="Social-networks__wrapper">
-                    <ul class="Social-networks__list">
-                        <li class="Social-networks__item">
-                            <a class="Social-networks__link" href="#" target="_blank">
-					<span class="Social-networks__link-icon Icon Icon--l Icon--color-e ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#skype"></use>
-		</svg>
-	</div>
-</span>
-
-                            </a>
-                        </li>
-                        <li class="Social-networks__item">
-                            <a class="Social-networks__link" href="#" target="_blank">
-					<span class="Social-networks__link-icon Icon Icon--l Icon--color-e ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#whatsapp"></use>
-		</svg>
-	</div>
-</span>
-
-                            </a>
-                        </li>
-                        <li class="Social-networks__item">
-                            <a class="Social-networks__link" href="#" target="_blank">
-					<span class="Social-networks__link-icon Icon Icon--l Icon--color-e ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#telegram"></use>
-		</svg>
-	</div>
-</span>
-
-                            </a>
-                        </li>
-                    </ul>
-                    <h3 class="Social-networks__title">ООО «Команда Ф5» <br> ИНН <a>2130183567</a></h3>
-                </div>
-            </div>
-
-            <div class="footer__feedback Feedback">
-                <div class="Feedback__wrapper">
-                    <h3 class="Feedback__title">Контакты</h3>
-                    <div class="Feedback__block-number">
-			<span class="Feedback__block-number-icon Icon Icon--s Icon--color-e ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#phone"></use>
-		</svg>
-	</div>
-</span>
-
-                        <div class="Feedback__number">
-                            <a class="Feedback__number-link Link Link--l Link--color-e " target="_blank"
-                               href="tel:+78002009397">8 (800) 200-93-97</a>
-
-                        </div>
-                    </div>
-                    <div class="Feedback__block-address">
-			<span class="Feedback__block-address-icon Icon Icon--s Icon--color-e ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#location"></use>
-		</svg>
-	</div>
-</span>
-
-                        <h3 class="Feedback__address-title">Россия, г. Чебоксары, ул. Карла Маркса, 52/9</h3>
-                    </div>
-                    <div class="Feedback__block-mail">
-			<span class="Feedback__block-mail-icon Icon Icon--s Icon--color-e ">
-	<div class="Icon__content">
-		<svg class="Icon__svg">
-			<use class="Icon__svg-use" xlink:href="#mail"></use>
-		</svg>
-	</div>
-</span>
-
-                        <div class="Feedback__mail">
-                            <a class="Feedback__mail-link Link Link--s Link--color-e " target="_blank"
-                               href="mailto:hello@proplan.su">hello@proplan.su</a>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </footer>
+@include('includes.footer')
 
     <div class="popup-write-us _bs" id="popup-write-us" style="display: none">
         <div class="popup-write-us__wrapper">
@@ -1263,20 +996,24 @@
             </div>
 
             <div class="popup-write-us__block-input-form">
-                <form class="popup-write-us__form js-form-validation" action="/url1.php" novalidate="novalidate"
-                      onsubmit="formApi(this); return false">
+                @php
+                    $main = true;
+                    $tableName = 'users';
+                @endphp
+                <form class="popup-write-us__form js-form-validation" action="{{ route('user.create', ['table' => $tableName, 'main' => $main]) }}" novalidate="novalidate" onsubmit="formApi(this); return false">
+                    @csrf
                     <div class="popup-write-us__block-inputs">
                         <div class="Input input">
-                            <input class="Input__inp" type="text" name="fio" placeholder="ФИО" required=""/>
+                            <input class="Input__inp" type="text" name="name" placeholder="ФИО" required=""/>
                             <span class="input-validation__message input-validation__message-mod"></span>
                         </div>
                         <div class="Input input">
-                            <input class="Input__inp mask-phone-js" type="tel" name="tel" placeholder="Телефон"
+                            <input class="Input__inp mask-phone-js" type="tel" name="phone" placeholder="Телефон"
                                    required=""/>
                             <span class="input-validation__message input-validation__message-mod"></span>
                         </div>
                         <div class="Input input">
-                            <input class="Input__inp" type="email" name="mail" placeholder="E-mail"/>
+                            <input class="Input__inp" type="email" name="email" placeholder="E-mail"/>
                         </div>
                     </div>
                     <div class="Action-button">
@@ -1284,7 +1021,7 @@
                             <input type="checkbox" name="checkbox" required=""/>
                             <span class="Action-button__content">
 							<span class="Action-button__text Action-button__text--policy"> Вы принимаете условия <a
-                                    href="##"
+                                    href="privacy-policy"
                                     target="_blank">пользовательского соглашения и политики конфиденциальности</a> </span>
 						</span>
                             <span class="input-validation__message input-validation__message-mod"></span>

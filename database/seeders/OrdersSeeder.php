@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
+use App\Models\Orders;
 
 class OrdersSeeder extends Seeder
 {
@@ -13,6 +14,9 @@ class OrdersSeeder extends Seeder
      */
     public function run(): void
     {
+        DB::statement('SET FOREIGN_KEY_CHECKS=0');
+        Orders::truncate();
+        DB::statement('SET FOREIGN_KEY_CHECKS=1');
         $data = [];
         for ($i = 1; $i < 4; $i++)
         {
