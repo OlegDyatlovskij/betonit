@@ -40,43 +40,13 @@
 @php
     $first = true;
 @endphp
-@for ($i = 0; $i < count($facilitiesRecords); $i++)
-@if ($first)
-                            <div class="Tabs__item Tabs__item--active" data-identification-tab="3" data-index-tab="{{$i}}">
-@php
-    $first = false;
-@endphp
-@else
-                            <div class="Tabs__item" data-identification-tab="3" data-index-tab="{{$i}}">
-@endif
+@foreach ($facilitiesRecords as $key=>$value)
+                            <div class="Tabs__item @if($first){{'Tabs__item--active'}}@php $first = false; @endphp@endif" data-identification-tab="3" data-index-tab="{{$key}}">
                                 <button class="Button Button--line Button--theme-m Button--theme-m-w">
-                                    <span class="Button__text">{{ $facilitiesRecords[$i]['title'] }}</span>
+                                    <span class="Button__text">{{ $value['title'] }}</span>
                                 </button>
                             </div>
-@endfor
-                            <!--<div class="Tabs__item" data-identification-tab="3" data-index-tab="2">
-                                <button class="Button Button--line Button--theme-m Button--theme-m-w">
-                                    <span class="Button__text">Программма оператора</span>
-                                </button>
-                            </div>
-
-                            <div class="Tabs__item" data-identification-tab="3" data-index-tab="3">
-                                <button class="Button Button--line Button--theme-m Button--theme-m-w">
-                                    <span class="Button__text">Управление из браузера</span>
-                                </button>
-                            </div>
-
-                            <div class="Tabs__item" data-identification-tab="3" data-index-tab="4">
-                                <button class="Button Button--line Button--theme-m Button--theme-m-w">
-                                    <span class="Button__text">Облачная или коробочная</span>
-                                </button>
-                            </div>
-
-                            <div class="Tabs__item" data-identification-tab="3" data-index-tab="5">
-                                <button class="Button Button--line Button--theme-m Button--theme-m-w">
-                                    <span class="Button__text">Интеграции</span>
-                                </button>
-                            </div>-->
+@endforeach
                         </div>
 
                         <div class="Tabs__blocks">
@@ -84,211 +54,41 @@
 @php
     $first = true;
 @endphp
-@for ($i = 0; $i < count($facilitiesRecords); $i++)
-@if ($first)
-                            <div class="Tabs__block Tabs__block--active" data-identification-tab="3" data-index-tab="{{$i}}">
-@else
-                            <div class="Tabs__block Tabs__block--not-active" data-identification-tab="3" data-index-tab="{{$i}}">
-@endif
+@foreach ($facilitiesRecords as $key=>$value)
+                            <div class="{{ 'Tabs__block ' . ($first ? 'Tabs__block--active' : 'Tabs__block--not-active') }}" :  data-identification-tab="3" data-index-tab="{{$key}}">
+                                
                                 <div class="block-tabs">
                                     <div class="block-tabs__wrapper">
-@if ($first)
-                                        <div class="block-tabs__img" data-aos="fade-right">
-@else
-                                        <div class="block-tabs__img">
-@endif
+                                        <div class="block-tabs__img" @if ($first) {{'data-aos="fade-right"'}} @endif>
+
                                             <div class="block-tabs__logo-picture Picture">
                                                 <picture class="Picture__block-img">
                                                     <source class="Picture__img" type="image/webp"
-                                                            srcset="{{ $facilitiesRecords[$i]['srcset'] }}" alt="{{ $facilitiesRecords[$i]['alt'] }}"
-                                                            data-fancybox href="{{ $facilitiesRecords[$i]['srcset'] }}"/>
-                                                    <img class="Picture__img" src="{{ $facilitiesRecords[$i]['src'] }}"
-                                                         alt="{{ $facilitiesRecords[$i]['alt'] }}" data-fancybox
-                                                         href="{{ $facilitiesRecords[$i]['src'] }}"/>
+                                                            srcset="{{ $value['srcset'] }}" alt="{{ $value['alt'] }}"
+                                                            data-fancybox href="{{ $value['srcset'] }}"/>
+                                                    <img class="Picture__img" src="{{ $value['src'] }}"
+                                                         alt="{{ $value['alt'] }}" data-fancybox
+                                                         href="{{ $value['src'] }}"/>
                                                 </picture>
                                             </div>
                                         </div>
-@if ($first)
-                                        <div class="block-tabs__content" data-aos="fade-left">
-@php
-    $first = false;
-@endphp
-@else
-                                        <div class="block-tabs__content">
-@endif
-                                            <h2 class="block-tabs__content-title">{{ $facilitiesRecords[$i]['title'] }}</h2>
+                                        <div class="block-tabs__content" @if($first) 'data-aos="fade-left"' @php $first = false; @endphp @endif>
+                                            <h2 class="block-tabs__content-title">{{ $value['title'] }}</h2>
+                                            <p class="block-tabs__content-text">
                                             @php
-                                                echo $facilitiesRecords[$i]['description'];
+                                                echo $value['description'];
                                             @endphp
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-@endfor
-<!--
-                            <div class="Tabs__block Tabs__block--active" data-identification-tab="3" data-index-tab="1">
-                                <div class="block-tabs">
-                                    <div class="block-tabs__wrapper">
-                                        <div class="block-tabs__img" data-aos="fade-right">
-                                            <div class="block-tabs__logo-picture Picture">
-                                                <picture class="Picture__block-img">
-                                                    <source class="Picture__img" type="image/webp"
-                                                            srcset="img/block-tabs-1.webp" alt="block-tabs-1.jpg"
-                                                            data-fancybox href="img/block-tabs-1.webp"/>
-                                                    <img class="Picture__img" src="img/block-tabs-1.jpg"
-                                                         alt="block-tabs-1.jpg" data-fancybox
-                                                         href="img/block-tabs-1.jpg"/>
-                                                </picture>
-                                            </div>
-                                        </div>
-                                        <div class="block-tabs__content" data-aos="fade-left">
-                                            <h2 class="block-tabs__content-title">Головная программа</h2>
-                                            <p class="block-tabs__content-text">
-                                                Головная программа предназначена для формирования заявок, работ
-                                                и отчетности. <br/>
-                                                Этот модуль АСУ БатонИТ» имеет панель управления, через которую
-                                                ответственный сотрудник (диспетчер) может создавать заявки для заводов,
-                                                вести базу сотрудников, контрагентов
-                                                и транспорта. Диспетчер может в онлайн отслеживать процесс выполнения
-                                                назначенных им работ.<br/>
-                                                Функция точной настройки рецептов позволяет обеспечить выпуск
-                                                качественного материала на каждом заводе.
                                             </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="Tabs__block Tabs__block--not-active" data-identification-tab="3"
-                                 data-index-tab="2">
-                                <div class="block-tabs">
-                                    <div class="block-tabs__wrapper">
-                                        <div class="block-tabs__img">
-                                            <div class="block-tabs__logo-picture Picture">
-                                                <picture class="Picture__block-img">
-                                                    <source class="Picture__img" type="image/webp"
-                                                            srcset="img/block-tabs-2.webp" alt="block-tabs-2.jpg"
-                                                            data-fancybox href="img/block-tabs-2.webp"/>
-                                                    <img class="Picture__img" src="img/block-tabs-2.jpg"
-                                                         alt="block-tabs-2.jpg" data-fancybox
-                                                         href="img/block-tabs-2.jpg"/>
-                                                </picture>
-                                            </div>
-                                        </div>
-                                        <div class="block-tabs__content">
-                                            <h2 class="block-tabs__content-title">Программа оператора</h2>
-                                            <p class="block-tabs__content-text">
-                                                Программа оператора, работает непосредственно на заводе с контролером
-                                                РБУ и отвечает за отгрузку.<br/>
-                                                Оператор — сотрудник, непосредственно отвечающий за отгрузку готовой
-                                                продукции.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="Tabs__block Tabs__block--not-active" data-identification-tab="3"
-                                 data-index-tab="3">
-                                <div class="block-tabs">
-                                    <div class="block-tabs__wrapper">
-                                        <div class="block-tabs__img">
-                                            <div class="block-tabs__logo-picture Picture">
-                                                <picture class="Picture__block-img">
-                                                    <source class="Picture__img" type="image/webp"
-                                                            srcset="img/block-tabs-3.webp" alt="block-tabs-3.jpg"
-                                                            data-fancybox href="img/block-tabs-3.webp"/>
-                                                    <img class="Picture__img" src="img/block-tabs-3.jpg"
-                                                         alt="block-tabs-3.jpg" data-fancybox
-                                                         href="img/block-tabs-3.jpg"/>
-                                                </picture>
-                                            </div>
-                                        </div>
-                                        <div class="block-tabs__content">
-                                            <h2 class="block-tabs__content-title">Управление из браузера</h2>
-                                            <p class="block-tabs__content-text">
-                                                Управление АСУ ТП осуществляется посредством любого браузера с любого
-                                                персонального компьютера завода, в случае с облачным решением управление
-                                                возможно осуществлять и с мобильных
-                                                устройств.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="Tabs__block Tabs__block--not-active" data-identification-tab="3"
-                                 data-index-tab="4">
-                                <div class="block-tabs">
-                                    <div class="block-tabs__wrapper">
-                                        <div class="block-tabs__img">
-                                            <div class="block-tabs__logo-picture Picture">
-                                                <picture class="Picture__block-img">
-                                                    <source class="Picture__img" type="image/webp"
-                                                            srcset="img/block-tabs-4.webp" alt="block-tabs-4.jpg"
-                                                            data-fancybox href="img/block-tabs-4.webp"/>
-                                                    <img class="Picture__img" src="img/block-tabs-4.jpg"
-                                                         alt="block-tabs-4.jpg" data-fancybox
-                                                         href="img/block-tabs-4.jpg"/>
-                                                </picture>
-                                            </div>
-                                        </div>
-                                        <div class="block-tabs__content">
-                                            <h2 class="block-tabs__content-title">Облачная или коробочная версия</h2>
-                                            <ul class="block-tabs__content-list">
-                                                Развертывание АСУ возможно в нескольких вариантах:
-                                                <li class="block-tabs__content-item">Локальная АСУ (коробочная версия)
-                                                </li>
-                                                <li class="block-tabs__content-item">АСУ с применение облачного
-                                                    решения
-                                                </li>
-                                            </ul>
-                                            <p class="block-tabs__content-text">
-                                                Система может строиться как в локальной сети так и с использованием
-                                                облачного сервиса, что в разы уменьшает стоимость системы и затраты
-                                                на покупку и содержания серверного оборудования.
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="Tabs__block Tabs__block--not-active" data-identification-tab="3"
-                                 data-index-tab="5">
-                                <div class="block-tabs">
-                                    <div class="block-tabs__wrapper">
-                                        <div class="block-tabs__img">
-                                            <div class="block-tabs__logo-picture Picture">
-                                                <picture class="Picture__block-img">
-                                                    <source class="Picture__img" type="image/webp"
-                                                            srcset="img/block-tabs-5.webp" alt="block-tabs-5.jpg"
-                                                            data-fancybox href="img/block-tabs-5.webp"/>
-                                                    <img class="Picture__img" src="img/block-tabs-5.jpg"
-                                                         alt="block-tabs-5.jpg" data-fancybox
-                                                         href="img/block-tabs-5.jpg"/>
-                                                </picture>
-                                            </div>
-                                        </div>
-                                        <div class="block-tabs__content">
-                                            <h2 class="block-tabs__content-title">Интеграции</h2>
-                                            <p class="block-tabs__content-text">
-                                                Программа может работать практически с любыми контроллерами РБУ, который
-                                                имеет возможность подключения по технологии Ethernet и имеют открытый
-                                                код для их программирования. <br/>
-                                                Программа имеет обширный настраиваемый функционал отчетности, а также
-                                                интеграцию с бухгалтерской системой 1С: Предприятие
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>-->
+@endforeach
                         </div>
                     </div>
                 </div>
-
             </div>
         </section>
-
         <section class="bid" id="bid"
                  style="background-image: url(/img/bid-bg.jpg); background-position: center; background-size: cover">
             <div class="bid__wrapper bid__wrapper--max-width bid__wrapper--container">
@@ -696,7 +496,7 @@
     $count = count($productsRecords);
     $counter = 0;
 @endphp
-@for ($i = 0; $i < count($productsRecords); $i += 3)
+@for ($i = 0; $i < $count; $i += 3)
                 <ul class="price__list">
                     <li class="price__item item-price" data-aos='fade-left' data-aos-anchor-placement="center-bottom"
                         data-aos-duration='800'>
@@ -985,60 +785,6 @@
 
     </main>
 @include('includes.footer')
-
-    <div class="popup-write-us _bs" id="popup-write-us" style="display: none">
-        <div class="popup-write-us__wrapper">
-            <div class="popup-write-us__heading">
-                <div class="popup-write-us__title">
-                    <h3 class="popup-write-us__title-text">Оставьте свои контакты</h3>
-                    <h4 class="popup-write-us__subtitle">и мы скоро свяжемся с Вами</h4>
-                </div>
-            </div>
-
-            <div class="popup-write-us__block-input-form">
-                @php
-                    $main = true;
-                    $tableName = 'users';
-                @endphp
-                <form class="popup-write-us__form js-form-validation" action="{{ route('user.create', ['table' => $tableName, 'main' => $main]) }}" novalidate="novalidate" onsubmit="formApi(this); return false">
-                    @csrf
-                    <div class="popup-write-us__block-inputs">
-                        <div class="Input input">
-                            <input class="Input__inp" type="text" name="name" placeholder="ФИО" required=""/>
-                            <span class="input-validation__message input-validation__message-mod"></span>
-                        </div>
-                        <div class="Input input">
-                            <input class="Input__inp mask-phone-js" type="tel" name="phone" placeholder="Телефон"
-                                   required=""/>
-                            <span class="input-validation__message input-validation__message-mod"></span>
-                        </div>
-                        <div class="Input input">
-                            <input class="Input__inp" type="email" name="email" placeholder="E-mail"/>
-                        </div>
-                    </div>
-                    <div class="Action-button">
-                        <label class="Action-button__wrapper">
-                            <input type="checkbox" name="checkbox" required=""/>
-                            <span class="Action-button__content">
-							<span class="Action-button__text Action-button__text--policy"> Вы принимаете условия <a
-                                    href="privacy-policy"
-                                    target="_blank">пользовательского соглашения и политики конфиденциальности</a> </span>
-						</span>
-                            <span class="input-validation__message input-validation__message-mod"></span>
-                        </label>
-                    </div>
-                    <div class="popup-write-us__btns">
-                        <button class="Button Button--full Button--color-a" type="submit">
-                            <span class="Button__text">Отправить</span>
-                        </button>
-                        <span class="popup-write-us__status" style='display: none;'>
-
-					</span>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
 
 </div>
 <script src="js/1_jquery.min.js"></script>
