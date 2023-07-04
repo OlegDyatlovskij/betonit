@@ -4,9 +4,9 @@
 <form method="POST" action="{{ route('record.create', ['table' => $tableName]) }}">
     @csrf
     <div class="card-body">
-    @foreach($headers as $key)
+    @foreach($headers as $header)
     
-        @if ($key === "id" or $key === 'created_at' or $key === 'updated_at')
+        @if ($header === "id" or $header === 'created_at' or $header === 'updated_at')
             @continue;
         @endif
         @if ($tableName === 'orders')
@@ -34,9 +34,9 @@
             @break
 
         @elseif ($tableName === 'permissions')
-            @if ($key === 'role_id')
-                <label>{{ $key }}</label>
-                <select class="form-control" name="{{ $key }}">
+            @if ($header === 'role_id')
+                <label>{{ $header }}</label>
+                <select class="form-control" name="{{ $header }}">
                     @foreach ($rolesId as $id=>$role)
                         <option value="{{$id}}">{{$role}}</option>
                     @endforeach
@@ -45,8 +45,8 @@
             @endif
         @endif
         <div class="form-group">
-            <label>{{ $key }}</label>
-            <input class="form-control" name = "{{ $key }}" placeholder="Enter {{ $key }}">
+            <label>{{ $header }}</label>
+            <input class="form-control" name = "{{ $header }}" placeholder="Enter {{ $header }}">
         </div>
     @endforeach
     </div>

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8"/>
@@ -14,7 +15,7 @@
     <header class="header header--main">
         <div class="header__wrapper header__wrapper--max-width header__wrapper--container">
             <div class="header__action">
-                <a class="header__logo" href="#hero">
+                <a class="header__logo" href="/">
                     <div class="header__logo-picture Picture">
                         <picture class="Picture__block-img">
                             <source class="Picture__img" srcset="img/logo.webp" alt="logo.png" type="image/webp"/>
@@ -54,6 +55,9 @@
                             <li class="Nav__item item-nav"><a
                                     class="item-nav__link Link Link--header Link--s Link--color-header " href="#info">О
                                 компании</a>
+                            </li>
+                            <li class="Nav__item item-nav"><a
+                                    class="item-nav__link Link Link--header Link--s Link--color-header " href="{{route('admin.panel')}}">Admin panel</a>
                             </li>
                         </ul>
                     </div>
