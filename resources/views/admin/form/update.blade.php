@@ -17,8 +17,8 @@
                     <table id="example2" class="table table-bordered table-hover dataTable dtr-inline" aria-describedby="example2_info">
                         <thead>
                             <tr>
-                                @foreach($headers as $key)
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">{{$key}}</th>
+                                @foreach($headers as $header)
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">{{$header}}</th>
                                 @endforeach
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">Action</th>
                             </tr>
@@ -41,8 +41,8 @@
                         </tbody>
                         <tfoot>
                             <tr>
-                                @foreach($headers as $key)
-                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">{{$key}}</th>
+                                @foreach($headers as $header)
+                                <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">{{$header}}</th>
                                 @endforeach
                                 <th class="sorting" tabindex="0" aria-controls="example2" rowspan="1" colspan="1" aria-sort="ascending" aria-label="">Действие</th>
                             </tr>

@@ -103,3 +103,57 @@
 
         </div>
     </footer>
+    <div class="popup-write-us _bs" id="popup-write-us" style="display: none">
+        <div class="popup-write-us__wrapper">
+            <div class="popup-write-us__heading">
+                <div class="popup-write-us__title">
+                    <h3 class="popup-write-us__title-text">Оставьте свои контакты</h3>
+                    <h4 class="popup-write-us__subtitle">и мы скоро свяжемся с Вами</h4>
+                </div>
+            </div>
+
+            <div class="popup-write-us__block-input-form">
+                @php
+                    $main = true;
+                    $tableName = 'users';
+                @endphp
+                <form method="POST" class="popup-write-us__form js-form-validation" action="{{ route('user.create', ['table' => $tableName, 'main' => $main]) }}" novalidate="novalidate">
+                    @csrf
+                    @method('POST')
+                    <div class="popup-write-us__block-inputs">
+                        <div class="Input input">
+                            <input class="Input__inp" type="text" name="name" placeholder="ФИО" required=""/>
+                            <span class="input-validation__message input-validation__message-mod"></span>
+                        </div>
+                        <div class="Input input">
+                            <input class="Input__inp mask-phone-js" type="tel" name="phone" placeholder="Телефон"
+                                   required=""/>
+                            <span class="input-validation__message input-validation__message-mod"></span>
+                        </div>
+                        <div class="Input input">
+                            <input class="Input__inp" type="email" name="email" placeholder="E-mail"/>
+                        </div>
+                    </div>
+                    <div class="Action-button">
+                        <label class="Action-button__wrapper">
+                            <input type="checkbox" name="checkbox" required=""/>
+                            <span class="Action-button__content">
+							<span class="Action-button__text Action-button__text--policy"> Вы принимаете условия <a
+                                    href="privacy-policy"
+                                    target="_blank">пользовательского соглашения и политики конфиденциальности</a> </span>
+						</span>
+                            <span class="input-validation__message input-validation__message-mod"></span>
+                        </label>
+                    </div>
+                    <div class="popup-write-us__btns">
+                        <button class="Button Button--full Button--color-a" type="submit">
+                            <span class="Button__text">Отправить</span>
+                        </button>
+                        <span class="popup-write-us__status" style='display: none;'>
+
+					</span>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>

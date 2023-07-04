@@ -31,5 +31,7 @@ route::get('/test', function (){
 });
 
 Route::fallback(function () {
-    return view('404');
+    $informationModel = app("App\\Models\\information");
+    $informationRecords = $informationModel::getAllRecords();
+    return view('404', ['informationRecords' => $informationRecords]);
 });

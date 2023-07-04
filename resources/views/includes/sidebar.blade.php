@@ -18,7 +18,8 @@
                   <i class="nav-icon fas fa-file"></i>
                   <p>
                     Users
-                  <i class="fas fa-angle-left right"></i>
+                  <!--<i class="fas fa-angle-left right"></i>-->
+                  <i class="right fas fa-angle-left"></i>
                   </p>
                 </a>
                 <ul class="nav nav-treeview" style="display: none;">
